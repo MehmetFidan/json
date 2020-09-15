@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="jquery.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+	</script>
+	
+
+</head>
+<body>
+<table class="table table-borderless table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+      <th scope="col"><button class="btn-success">Edit</button></th>
+      <th scope="col"><button class="btn-danger">Delete</button></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td scope="col"><button class="btn-success">Edit</button></td>
+      <td scope="col"><button class="btn-danger">Delete</button></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <td scope="col"><button class="btn-success">Edit</button></td>
+      <td scope="col"><button class="btn-danger">Delete</button></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>The bird</td>
+      <td>@twitter</td>
+      <td scope="col"><button class="btn-success">Edit</button></td>
+      <td scope="col"><button class="btn-danger">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+<button id="vericek">Verileri Çek</button>
+<div>
+  <table id="liste" class="table table-borderless table-dark">
+    <tr>
+        <th>Sıra</th>
+        <th>Numara</th>
+        <th>Ad</th>
+    </tr>
+</div>
+
+
+<script >
+$("#vericek").click(function(){
+ 
+        $.getJSON("kisiler.json",function (data){
+          data.forEach(function(nesne,index){
+
+          let satir=$("<tr>") //<tr> elementi oluşturur
+          let hucre1=$("<td>").text(index)
+          let hucre2=$("<td>").text(nesne.Numara)
+          let hucre3=$("<td>").text(nesne.Ad)
+
+          satir.append(hucre1) //hücre1 i satir içine ekler
+          satir.append(hucre2) //hücre2 yi satir içine ekler
+          satir.append(hucre3)//hücre3 ü satir içine ekler
+
+          $("#liste").append(satir) //liste içine satir elementini ekler.
+
+        })
+        })
+    })
+</script>
+</body>
+<!--//[] {} @  # | $
+ -->
+</html>
