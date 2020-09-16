@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 <head>
 	<title></title>
@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<table class="table table-borderless table-dark">
+<!--<table class="table table-borderless table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -47,39 +47,64 @@
       <td scope="col"><button class="btn-danger">Delete</button></td>
     </tr>
   </tbody>
-</table>
+</table>-->
 <button id="vericek">Verileri Çek</button>
+<button type="button" class="delete-row">Delete Row</button>
 <div>
   <table id="liste" class="table table-borderless table-dark">
     <tr>
         <th>Sıra</th>
         <th>Numara</th>
         <th>Ad</th>
+
     </tr>
 </div>
 
-
-<script >
+<script>
 $("#vericek").click(function(){
- 
-        $.getJSON("kisiler.json",function (data){
-          data.forEach(function(nesne,index){
+    //gel(); 
+        $.ajax({
+          url: "https://raw.githubusercontent.com/MehmetFidan/personel/master/personel.json",
+          success: function( data ) {
+            result = JSON.parse(data);
+            result.members.forEach(function(item) {
+              let satir=$("<tr>") //<tr> elementi oluşturur
+              var hucre1=$("<td><input type='checkbox' name='record'></td>")
+              let hucre2=$("<td>").text(item.name)
+              let hucre3=$("<td>").text(item.name)
+              let hucre4=$("button")
+              satir.append(hucre1) //hücre2 yi satir içine ekler
+              satir.append(hucre2) //hücre2 yi satir içine ekler
+              satir.append(hucre3)//hücre3 ü satir içine ekler
+              satir.append(hucre4)//hücre3 ü satir içine ekler
+              $("#liste").append(satir) //liste içine satir elementini ekler.
 
-          let satir=$("<tr>") //<tr> elementi oluşturur
-          let hucre1=$("<td>").text(index)
-          let hucre2=$("<td>").text(nesne.Numara)
-          let hucre3=$("<td>").text(nesne.Ad)
-
-          satir.append(hucre1) //hücre1 i satir içine ekler
-          satir.append(hucre2) //hücre2 yi satir içine ekler
-          satir.append(hucre3)//hücre3 ü satir içine ekler
-
-          $("#liste").append(satir) //liste içine satir elementini ekler.
-
-        })
-        })
+           });
+        }
     })
+    })
+/*function gel (){
+  var satir=$("<tr>") //<tr> elementi oluşturur
+    var hucre1=$("<td>").text("1")
+    var hucre2=$("<td>").text("120")
+    var hucre3=$("<td>").text("Ali")
+ 
+    satir.append(hucre1) //hücre1 i satir içine ekler
+    satir.append(hucre2) //hücre2 yi satir içine ekler
+    satir.append(hucre3)//hücre3 ü satir içine ekler
+ 
+    $("#liste").append(satir) //liste içine satir elementini ekler.
+}*/
+$(".delete-row").click(function(){
+            $("table tr").find('input[name="record"]').each(function(){
+              if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
 </script>
+
+
 </body>
 <!--//[] {} @  # | $
  -->
